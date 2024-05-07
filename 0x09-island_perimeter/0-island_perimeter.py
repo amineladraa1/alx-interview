@@ -11,19 +11,17 @@ def island_perimeter(grid):
     Return:
         the perimeter of the island
     """
-    visit = set()
-    def dfs(i, j):
-        if i >= length(grid) or j >= length(grid[0]) or \
-                i < 0 or j < 0 or grid[i][j] == 0 :
-                    return 1
-        if (i ,j) in visit:
-            return 0
-        visit.add((i, j))
-        perimitar = dfs(i - 1,j)
-        perimitar += dfs(i + 1,j)
-        perimitar += dfs(i, j - 1)
-        perimitar += dfs(i, j + 1)
+
+    p = 0
     for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j]:
-                return dfs(i, j);
+        for j in range(len(grid[i])):
+            if (grid[i][j] == 1):
+                if (i <= 0 or grid[i - 1][j] == 0):
+                    p += 1
+                if (i >= len(grid) - 1 or grid[i + 1][j] == 0):
+                    p += 1
+                if (j <= 0 or grid[i][j - 1] == 0):
+                    p += 1
+                if (j >= len(grid[i]) - 1 or grid[i][j + 1] == 0):
+                    p += 1
+    return p
